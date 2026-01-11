@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>电商微服务系统</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial;
+      background: #f5f7fa;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-bottom: 15px;
+    }
+    input, button {
+      padding: 6px 10px;
+      margin: 5px;
+    }
+    button {
+      background: #409eff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #66b1ff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #f0f2f5;
+    }
+  </style>
+</head>
+
+<body>
+<div id="app">
+  <h1>🛒 电商微服务系统</h1>
+
+  <!-- 用户 -->
+  <div class="card">
+    <h2>👤 用户管理</h2>
+    <input v-model="user.username" placeholder="用户名">
+    <input v-model="user.email" placeholder="邮箱">
+    <button @click="addUser">新增用户</button>
+
+    <table>
+      <tr><th>ID</th><th>用户名</th><th>邮箱</th></tr>
+      <tr v-for="u in users" :key="u.id">
+        <td>{{u.id}}</td>
+        <td>{{u.username}}</td>
+        <td>{{u.email}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 商品 -->
+  <div class="card">
+    <h2>📦 商品管理</h2>
+    <input v-model="product.name" placeholder="商品名">
+    <input v-model="product.price" placeholder="价格">
+    <input v-model="product.stock" placeholder="库存">
+    <button @click="addProduct">新增商品</button>
+
+    <table>
+      <tr><th>ID</th><th>名称</th><th>价格</th><th>库存</th></tr>
+      <tr v-for="p in products" :key="p.id">
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.stock}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 订单 -->
+  <div class="card">
+    <h2>🧾 订单管理</h2>
+    <input v-model="order.userId" placeholder="用户ID">
+    <input v-model="order.productId" placeholder="商品ID">
+    <input v-model="order.quantity" placeholder="数量">
+    <button @click="addOrder">创建订单</button>
+
+    <table>
+      <tr>
+        <th>ID</th><th>用户ID</th><th>商品ID</th>
+        <th>数量</th><th>总价</th>
+      </tr>
+      <tr v-for="o in orders" :key="o.id">
+        <td>{{o.id}}</td>
+        <td>{{o.userId}}</td>
+        <td>{{o.productId}}</td>
+        <td>{{o.quantity}}</td>
+        <td>{{o.totalPrice}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
